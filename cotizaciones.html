@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Solicita tu Cotización | AJ Constrive</title>
+<meta name="description" content="Cuéntanos sobre tu proyecto de arquitectura, ingeniería, remodelación o construcción y recibe una cotización preliminar en menos de 24 horas." />
+
+<!-- Tailwind CSS (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          graphite: '#101820',
+          concrete: '#3C4552',
+          copper: '#B9743B',
+          forest: '#4A5D45',
+          bone: '#F7F5F2',
+          stone: '#D9D5CE',
+          ink: '#181818',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          sans: ['"General Sans"', 'Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<!-- Google Fonts: Fraunces (títulos) + Inter (lectura) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- General Sans (Fontshare) -->
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(247,245,242,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,245,242,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #B9743B;
+    outline-offset: 3px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #B9743B;
+    box-shadow: 0 0 0 3px rgba(185,116,59,0.15);
+  }
+
+  /* Pasos del formulario: ocultos por defecto, controlados por JS */
+  .form-step { display: none; }
+  .form-step.is-active { display: block; }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: #D9D5CE;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #B9743B;
+    border: 3px solid #F7F5F2;
+    box-shadow: 0 0 0 1px #B9743B;
+    cursor: pointer;
+    margin-top: -8px;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #B9743B;
+    border: 3px solid #F7F5F2;
+    box-shadow: 0 0 0 1px #B9743B;
+    cursor: pointer;
+  }
+
+  .dropzone.is-dragover {
+    border-color: #B9743B;
+    background-color: rgba(185,116,59,0.06);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+
+<body class="bg-bone text-ink font-sans antialiased">
+
+<a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-copper focus:text-white focus:px-4 focus:py-2 focus:rounded">
+  Saltar al contenido principal
+</a>
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50">
+  <nav class="bg-graphite/90 backdrop-blur-sm border-b border-white/10" aria-label="Navegación principal">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+
+      <a href="index.html" class="flex items-center gap-2 shrink-0" aria-label="AJ Constrive — Inicio">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 26L17 5L30 26" stroke="#B9743B" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M10 26L17 14L24 26" stroke="#F7F5F2" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <span class="font-display text-xl text-bone tracking-tight">AJ Constrive</span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-9 font-sans text-sm text-bone/85">
+        <li><a href="nosotros.html" class="hover:text-copper transition-colors duration-200">Nosotros</a></li>
+        <li><a href="servicios.html" class="hover:text-copper transition-colors duration-200">Servicios</a></li>
+        <li><a href="portafolio.html" class="hover:text-copper transition-colors duration-200">Portafolio</a></li>
+        <li><a href="proceso-tecnologia.html" class="hover:text-copper transition-colors duration-200">Nuestro Proceso</a></li>
+        <li><a href="sectores.html" class="hover:text-copper transition-colors duration-200">Sectores</a></li>
+        <li><a href="contacto.html" class="hover:text-copper transition-colors duration-200">Contacto</a></li>
+      </ul>
+
+      <div class="flex items-center gap-4">
+        <a href="cotizaciones.html"
+           class="hidden sm:inline-flex items-center gap-2 bg-copper text-white text-sm font-medium px-5 py-2.5 rounded-md
+                  hover:bg-copper/90 hover:shadow-lg hover:shadow-copper/20 transition-all duration-200"
+           aria-current="page">
+          Solicita tu cotización
+        </a>
+
+        <button id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu"
+                class="lg:hidden text-bone p-2 -mr-2" aria-label="Abrir menú de navegación">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="hidden lg:hidden bg-graphite border-t border-white/10">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-bone/90 font-sans text-base">
+        <li><a href="nosotros.html" class="block py-1 hover:text-copper transition-colors">Nosotros</a></li>
+        <li><a href="servicios.html" class="block py-1 hover:text-copper transition-colors">Servicios</a></li>
+        <li><a href="portafolio.html" class="block py-1 hover:text-copper transition-colors">Portafolio</a></li>
+        <li><a href="proceso-tecnologia.html" class="block py-1 hover:text-copper transition-colors">Nuestro Proceso</a></li>
+        <li><a href="sectores.html" class="block py-1 hover:text-copper transition-colors">Sectores</a></li>
+        <li><a href="contacto.html" class="block py-1 hover:text-copper transition-colors">Contacto</a></li>
+        <li class="pt-2">
+          <a href="cotizaciones.html" class="inline-flex w-full justify-center bg-copper text-white text-sm font-medium px-5 py-3 rounded-md hover:bg-copper/90 transition-colors">
+            Solicita tu cotización
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main id="contenido">
+
+  <!-- ============ HERO ============ -->
+  <section class="relative pt-40 pb-14 lg:pt-48 lg:pb-16 overflow-hidden bg-graphite" aria-label="Solicita tu cotización">
+    <div class="absolute inset-0 blueprint-grid opacity-25"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-6 lg:px-10 text-center">
+      <nav aria-label="Ruta de navegación" class="mb-5 flex justify-center">
+        <ol class="flex items-center gap-2 font-mono text-xs text-bone/60">
+          <li><a href="index.html" class="hover:text-copper transition-colors">Inicio</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="text-copper">Cotizaciones</li>
+        </ol>
+      </nav>
+      <h1 class="font-display font-medium text-bone text-3xl sm:text-4xl lg:text-5xl leading-tight">
+        Cuéntanos sobre tu proyecto
+      </h1>
+      <p class="mt-4 text-bone/70 max-w-xl mx-auto">
+        Tres pasos rápidos y un especialista de AJ Constrive te contactará en menos de 24 horas
+        con los siguientes pasos.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FORMULARIO MULTI-PASO ============ -->
+  <section class="bg-bone" aria-label="Formulario de cotización">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10 -mt-8 lg:-mt-10 pb-24">
+
+      <div class="bg-white border border-stone rounded-2xl shadow-xl shadow-graphite/5 p-6 sm:p-10">
+
+        <!-- Barra de progreso -->
+        <div class="mb-10" role="group" aria-label="Progreso del formulario">
+          <ol class="flex items-center justify-between">
+
+            <li class="flex-1 flex items-center">
+              <div class="flex flex-col items-center gap-2 shrink-0" data-step-indicator="1">
+                <span class="step-dot w-9 h-9 rounded-full flex items-center justify-center font-mono text-sm font-medium
+                             bg-copper text-white transition-colors duration-300">1</span>
+                <span class="step-label text-xs font-medium text-graphite hidden sm:block">Datos personales</span>
+              </div>
+              <span class="step-bar flex-1 h-0.5 mx-2 sm:mx-3 bg-stone transition-colors duration-300"></span>
+            </li>
+
+            <li class="flex-1 flex items-center">
+              <div class="flex flex-col items-center gap-2 shrink-0" data-step-indicator="2">
+                <span class="step-dot w-9 h-9 rounded-full flex items-center justify-center font-mono text-sm font-medium
+                             bg-stone text-concrete transition-colors duration-300">2</span>
+                <span class="step-label text-xs font-medium text-concrete hidden sm:block">Tu proyecto</span>
+              </div>
+              <span class="step-bar flex-1 h-0.5 mx-2 sm:mx-3 bg-stone transition-colors duration-300"></span>
+            </li>
+
+            <li class="flex items-center">
+              <div class="flex flex-col items-center gap-2 shrink-0" data-step-indicator="3">
+                <span class="step-dot w-9 h-9 rounded-full flex items-center justify-center font-mono text-sm font-medium
+                             bg-stone text-concrete transition-colors duration-300">3</span>
+                <span class="step-label text-xs font-medium text-concrete hidden sm:block">Archivos y envío</span>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+
+        <!-- Estado de éxito (oculto por defecto) -->
+        <div id="successState" class="hidden text-center py-10">
+          <div class="w-16 h-16 rounded-full bg-forest/10 flex items-center justify-center mx-auto mb-6">
+            <i data-lucide="check-circle-2" class="w-8 h-8 text-forest"></i>
+          </div>
+          <h2 class="font-display text-2xl text-graphite mb-3">¡Solicitud recibida!</h2>
+          <p class="text-concrete max-w-sm mx-auto">
+            Hemos recibido tu solicitud de cotización. Un especialista de AJ Constrive te contactará
+            en menos de 24 horas.
+          </p>
+          <a href="index.html" class="inline-flex items-center gap-2 mt-8 text-copper font-medium hover:underline">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            Volver al inicio
+          </a>
+        </div>
+
+        <form id="quoteForm" novalidate>
+
+          <!-- ============ PASO 1: DATOS PERSONALES ============ -->
+          <div class="form-step is-active" data-step="1">
+            <h2 class="font-display text-xl text-graphite mb-1">Tus datos de contacto</h2>
+            <p class="text-concrete text-sm mb-8">Así podremos comunicarte la respuesta a tu solicitud.</p>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div class="sm:col-span-2">
+                <label for="nombre" class="block text-sm font-medium text-graphite mb-1.5">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" required autocomplete="name"
+                       class="w-full rounded-md border border-stone px-4 py-3 text-sm outline-none"
+                       placeholder="Ej. María Fernández" />
+                <p class="error-msg hidden text-xs text-red-600 mt-1.5">Ingresa tu nombre completo.</p>
+              </div>
+
+              <div>
+                <label for="correo" class="block text-sm font-medium text-graphite mb-1.5">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" required autocomplete="email"
+                       class="w-full rounded-md border border-stone px-4 py-3 text-sm outline-none"
+                       placeholder="tucorreo@ejemplo.com" />
+                <p class="error-msg hidden text-xs text-red-600 mt-1.5">Ingresa un correo válido.</p>
+              </div>
+
+              <div>
+                <label for="telefono" class="block text-sm font-medium text-graphite mb-1.5">Teléfono / WhatsApp</label>
+                <input type="tel" id="telefono" name="telefono" required autocomplete="tel"
+                       class="w-full rounded-md border border-stone px-4 py-3 text-sm outline-none"
+                       placeholder="+57 300 000 0000" />
+                <p class="error-msg hidden text-xs text-red-600 mt-1.5">Ingresa un número de contacto.</p>
+              </div>
+
+              <div class="sm:col-span-2">
+                <label for="ciudad" class="block text-sm font-medium text-graphite mb-1.5">Ciudad del proyecto</label>
+                <input type="text" id="ciudad" name="ciudad" required autocomplete="address-level2"
+                       class="w-full rounded-md border border-stone px-4 py-3 text-sm outline-none"
+                       placeholder="Ej. Bogotá" />
+                <p class="error-msg hidden text-xs text-red-600 mt-1.5">Cuéntanos en qué ciudad está el proyecto.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ PASO 2: DETALLES DEL PROYECTO ============ -->
+          <div class="form-step" data-step="2">
+            <h2 class="font-display text-xl text-graphite mb-1">Detalles del proyecto</h2>
+            <p class="text-concrete text-sm mb-8">Entre más contexto nos des, más precisa será tu cotización.</p>
+
+            <div class="space-y-6">
+              <div>
+                <label for="tipoProyecto" class="block text-sm font-medium text-graphite mb-1.5">Tipo de proyecto</label>
+                <select id="tipoProyecto" name="tipoProyecto" required
+                        class="w-full rounded-md border border-stone px-4 py-3 text-sm outline-none bg-white">
+                  <option value="" disabled selected>Selecciona una opción</option>
+                  <option value="remodelacion">Remodelación</option>
+                  <option value="diseno-arquitectonico">Diseño arquitectónico</option>
+                  <option value="ingenieria">Ingeniería</option>
+                  <option value="construccion">Construcción nueva</option>
+                  <option value="carpinteria">Carpintería y mobiliario</option>
+                  <option value="visualizacion-3d">Visualización 3D</option>
+                  <option value="no-seguro">No estoy seguro / varios servicios</option>
+                </select>
+                <p class="error-msg hidden text-xs text-red-600 mt-1.5">Selecciona el tipo de proyecto.</p>
+              </div>
+
+              <div>
+                <label for="descripcion" class="block text-sm font-medium text-graphite mb-1.5">Describe tu proyecto</label>
+                <textarea id="descripcion" name="descripcion" rows="4" required
+                          class="w-full rounded-md border border-stone px-4 py-3 text-sm outline-none resize-none"
+                          placeholder="Cuéntanos qué quieres lograr: área aproximada, estado actual del espacio, referencias de estilo, plazos..."></textarea>
+                <p class="error-msg hidden text-xs text-red-600 mt-1.5">Cuéntanos brevemente en qué consiste tu proyecto.</p>
+              </div>
+
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label for="presupuesto" class="block text-sm font-medium text-graphite">Presupuesto estimado</label>
+                  <span id="presupuestoValor" class="font-mono text-sm text-copper font-medium">$20.000 - $50.000 USD</span>
+                </div>
+                <input type="range" id="presupuesto" name="presupuesto" min="0" max="4" step="1" value="1"
+                       class="w-full" aria-describedby="presupuestoValor" />
+                <div class="flex justify-between text-[11px] text-concrete/70 font-mono mt-2">
+                  <span>&lt;$10k</span>
+                  <span>$10-20k</span>
+                  <span>$20-50k</span>
+                  <span>$50-100k</span>
+                  <span>+$100k</span>
+                </div>
+                <p class="text-xs text-concrete/70 mt-3">
+                  Este es un estimado preliminar. Tu cotización final se ajustará tras la evaluación técnica.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ PASO 3: ARCHIVOS Y ENVÍO ============ -->
+          <div class="form-step" data-step="3">
+            <h2 class="font-display text-xl text-graphite mb-1">Archivos y envío</h2>
+            <p class="text-concrete text-sm mb-8">
+              Adjunta planos, fotografías del espacio o referencias visuales (opcional).
+            </p>
+
+            <label for="archivos" id="dropzone" class="dropzone block cursor-pointer border-2 border-dashed border-stone rounded-xl
+                        px-6 py-12 text-center transition-colors duration-200 hover:border-copper/60">
+              <input type="file" id="archivos" name="archivos" multiple class="sr-only"
+                     accept=".pdf,.jpg,.jpeg,.png,.dwg" />
+              <i data-lucide="upload-cloud" class="w-9 h-9 text-copper mx-auto mb-4"></i>
+              <p class="text-sm font-medium text-graphite">Arrastra tus archivos aquí</p>
+              <p class="text-xs text-concrete mt-1">o haz clic para seleccionarlos — PDF, JPG, PNG o DWG, máx. 20MB</p>
+            </label>
+
+            <ul id="fileList" class="mt-4 space-y-2"></ul>
+
+            <div class="mt-8 flex items-start gap-3">
+              <input type="checkbox" id="privacidad" name="privacidad" required
+                     class="mt-0.5 w-4 h-4 rounded border-stone text-copper focus:ring-copper" />
+              <label for="privacidad" class="text-sm text-concrete">
+                Acepto la política de privacidad y autorizo a AJ Constrive a contactarme sobre mi solicitud.
+              </label>
+            </div>
+            <p class="error-msg hidden text-xs text-red-600 mt-1.5" id="privacidadError">
+              Debes aceptar la política de privacidad para continuar.
+            </p>
+          </div>
+
+          <!-- ============ NAVEGACIÓN DEL FORMULARIO ============ -->
+          <div class="mt-10 pt-6 border-t border-stone flex items-center justify-between">
+            <button type="button" id="btnPrev"
+                    class="inline-flex items-center gap-2 text-concrete font-medium text-sm px-5 py-3 rounded-md
+                           hover:text-graphite transition-colors duration-200 invisible">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              Atrás
+            </button>
+
+            <button type="button" id="btnNext"
+                    class="inline-flex items-center gap-2 bg-copper text-white font-medium text-sm px-6 py-3 rounded-md
+                           hover:bg-[#a3652f] hover:shadow-lg hover:shadow-copper/20 transition-all duration-200">
+              Siguiente
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+
+            <button type="submit" id="btnSubmit"
+                    class="hidden inline-flex items-center gap-2 bg-copper text-white font-medium text-sm px-6 py-3 rounded-md
+                           hover:bg-[#a3652f] hover:shadow-lg hover:shadow-copper/20 transition-all duration-200">
+              Enviar solicitud de cotización
+              <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Datos de contacto alternativos -->
+      <p class="text-center text-sm text-concrete mt-8">
+        ¿Prefieres hablar directamente con un asesor?
+        <a href="contacto.html" class="text-copper font-medium hover:underline">Ve a la página de contacto</a>.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink text-bone/70">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-14">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+      <div>
+        <span class="font-display text-xl text-bone">AJ Constrive</span>
+        <p class="mt-3 text-sm leading-relaxed max-w-xs">
+          Arquitectura, ingeniería, remodelación, carpintería y construcción integral en un solo equipo.
+        </p>
+      </div>
+
+      <nav aria-label="Enlaces de la empresa">
+        <h4 class="font-sans font-semibold text-bone text-sm uppercase tracking-wide mb-4">Empresa</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="nosotros.html" class="hover:text-copper transition-colors">Nosotros</a></li>
+          <li><a href="portafolio.html" class="hover:text-copper transition-colors">Portafolio</a></li>
+          <li><a href="proceso-tecnologia.html" class="hover:text-copper transition-colors">Nuestro Proceso</a></li>
+          <li><a href="blog.html" class="hover:text-copper transition-colors">Blog</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Enlaces de servicios">
+        <h4 class="font-sans font-semibold text-bone text-sm uppercase tracking-wide mb-4">Servicios</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="servicios-remodelaciones.html" class="hover:text-copper transition-colors">Remodelaciones</a></li>
+          <li><a href="servicios-diseno-arquitectonico.html" class="hover:text-copper transition-colors">Diseño arquitectónico</a></li>
+          <li><a href="servicios-ingenieria.html" class="hover:text-copper transition-colors">Ingeniería</a></li>
+          <li><a href="servicios-carpinteria.html" class="hover:text-copper transition-colors">Carpintería</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <h4 class="font-sans font-semibold text-bone text-sm uppercase tracking-wide mb-4">Contacto</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="contacto.html" class="hover:text-copper transition-colors">Escríbenos</a></li>
+          <li><a href="cotizaciones.html" class="hover:text-copper transition-colors">Solicita cotización</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-bone/50">
+      <p>&copy; <span id="year"></span> AJ Constrive. Todos los derechos reservados.</p>
+      <p>Arquitectura · Ingeniería · Construcción</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ JAVASCRIPT: HEADER + FORMULARIO MULTI-PASO ============ -->
+<script>
+  lucide.createIcons();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Menú móvil
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('hidden') === false;
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.innerHTML = isOpen
+      ? '<i data-lucide="x" class="w-6 h-6"></i>'
+      : '<i data-lucide="menu" class="w-6 h-6"></i>';
+    lucide.createIcons();
+  });
+</script>
+
+<script>
+  /* ============================================================
+     FORMULARIO MULTI-PASO — Cotizaciones AJ Constrive
+     Maneja: navegación entre pasos, barra de progreso, validación
+     por paso, slider de presupuesto, drag & drop de archivos.
+     ============================================================ */
+  (function () {
+    const form = document.getElementById('quoteForm');
+    const steps = Array.from(form.querySelectorAll('.form-step'));
+    const totalSteps = steps.length;
+    let currentStep = 1;
+
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnSubmit = document.getElementById('btnSubmit');
+
+    const stepIndicators = document.querySelectorAll('[data-step-indicator]');
+    const stepBars = document.querySelectorAll('.step-bar');
+
+    // ---------- Navegación entre pasos ----------
+    function goToStep(stepNumber) {
+      steps.forEach((stepEl) => {
+        stepEl.classList.toggle('is-active', Number(stepEl.dataset.step) === stepNumber);
+      });
+
+      updateProgressBar(stepNumber);
+
+      btnPrev.classList.toggle('invisible', stepNumber === 1);
+      btnNext.classList.toggle('hidden', stepNumber === totalSteps);
+      btnSubmit.classList.toggle('hidden', stepNumber !== totalSteps);
+
+      currentStep = stepNumber;
+
+      // Lleva el foco al inicio del paso para accesibilidad
+      const heading = steps[stepNumber - 1].querySelector('h2');
+      if (heading) heading.setAttribute('tabindex', '-1'), heading.focus({ preventScroll: true });
+
+      form.closest('section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateProgressBar(stepNumber) {
+      stepIndicators.forEach((indicator) => {
+        const n = Number(indicator.dataset.stepIndicator);
+        const dot = indicator.querySelector('.step-dot');
+        const label = indicator.querySelector('.step-label');
+
+        if (n < stepNumber) {
+          dot.className = 'step-dot w-9 h-9 rounded-full flex items-center justify-center font-mono text-sm font-medium bg-forest text-white transition-colors duration-300';
+          dot.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          label.className = 'step-label text-xs font-medium text-graphite hidden sm:block';
+        } else if (n === stepNumber) {
+          dot.className = 'step-dot w-9 h-9 rounded-full flex items-center justify-center font-mono text-sm font-medium bg-copper text-white transition-colors duration-300';
+          dot.textContent = n;
+          label.className = 'step-label text-xs font-medium text-graphite hidden sm:block';
+        } else {
+          dot.className = 'step-dot w-9 h-9 rounded-full flex items-center justify-center font-mono text-sm font-medium bg-stone text-concrete transition-colors duration-300';
+          dot.textContent = n;
+          label.className = 'step-label text-xs font-medium text-concrete hidden sm:block';
+        }
+      });
+
+      stepBars.forEach((bar, index) => {
+        bar.classList.toggle('bg-copper', index < stepNumber - 1 || (index === stepNumber - 2));
+        bar.classList.toggle('bg-stone', !(index < stepNumber - 1));
+      });
+      // Simplificación robusta: colorea las barras ya recorridas
+      stepBars.forEach((bar, index) => {
+        if (index <= stepNumber - 2) {
+          bar.classList.add('bg-copper');
+          bar.classList.remove('bg-stone');
+        } else {
+          bar.classList.add('bg-stone');
+          bar.classList.remove('bg-copper');
+        }
+      });
+    }
+
+    // ---------- Validación por paso ----------
+    function validateStep(stepNumber) {
+      const stepEl = steps[stepNumber - 1];
+      const requiredFields = stepEl.querySelectorAll('[required]');
+      let isValid = true;
+
+      requiredFields.forEach((field) => {
+        const errorMsg = field.closest('div').querySelector('.error-msg')
+          || (field.id === 'privacidad' ? document.getElementById('privacidadError') : null);
+
+        let fieldValid = true;
+        if (field.type === 'checkbox') {
+          fieldValid = field.checked;
+        } else {
+          fieldValid = field.value.trim() !== '';
+          if (field.type === 'email' && fieldValid) {
+            fieldValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+          }
+        }
+
+        field.classList.toggle('border-red-400', !fieldValid);
+        field.classList.toggle('border-stone', fieldValid);
+        if (errorMsg) errorMsg.classList.toggle('hidden', fieldValid);
+
+        if (!fieldValid) isValid = false;
+      });
+
+      return isValid;
+    }
+
+    // ---------- Eventos de navegación ----------
+    btnNext.addEventListener('click', () => {
+      if (!validateStep(currentStep)) return;
+      if (currentStep < totalSteps) goToStep(currentStep + 1);
+    });
+
+    btnPrev.addEventListener('click', () => {
+      if (currentStep > 1) goToStep(currentStep - 1);
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!validateStep(currentStep)) return;
+
+      // Aquí se integraría el envío real (fetch a un backend, Formspree, etc.)
+      form.classList.add('hidden');
+      document.getElementById('successState').classList.remove('hidden');
+      lucide.createIcons();
+    });
+
+    // ---------- Slider de presupuesto ----------
+    const presupuestoInput = document.getElementById('presupuesto');
+    const presupuestoValor = document.getElementById('presupuestoValor');
+    const presupuestoRangos = [
+      'Menos de $10.000 USD',
+      '$10.000 - $20.000 USD',
+      '$20.000 - $50.000 USD',
+      '$50.000 - $100.000 USD',
+      'Más de $100.000 USD',
+    ];
+    presupuestoInput.addEventListener('input', () => {
+      presupuestoValor.textContent = presupuestoRangos[Number(presupuestoInput.value)];
+    });
+
+    // ---------- Drag & Drop de archivos ----------
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('archivos');
+    const fileList = document.getElementById('fileList');
+    let selectedFiles = [];
+
+    ['dragenter', 'dragover'].forEach((eventName) => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('is-dragover');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach((eventName) => {
+      dropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.remove('is-dragover');
+      });
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+      const dropped = Array.from(e.dataTransfer.files);
+      addFiles(dropped);
+    });
+
+    fileInput.addEventListener('change', () => {
+      addFiles(Array.from(fileInput.files));
+    });
+
+    function addFiles(newFiles) {
+      selectedFiles = selectedFiles.concat(newFiles);
+      renderFileList();
+    }
+
+    function removeFile(index) {
+      selectedFiles.splice(index, 1);
+      renderFileList();
+    }
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    function renderFileList() {
+      fileList.innerHTML = '';
+      selectedFiles.forEach((file, index) => {
+        const li = document.createElement('li');
+        li.className = 'flex items-center justify-between gap-3 bg-bone border border-stone rounded-md px-4 py-2.5 text-sm';
+        li.innerHTML = `
+          <span class="flex items-center gap-2 min-w-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B9743B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span class="truncate text-graphite">${file.name}</span>
+            <span class="text-concrete/60 text-xs shrink-0">(${formatBytes(file.size)})</span>
+          </span>
+          <button type="button" data-remove-index="${index}" class="text-concrete hover:text-red-600 transition-colors shrink-0" aria-label="Quitar ${file.name}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        `;
+        fileList.appendChild(li);
+      });
+
+      fileList.querySelectorAll('[data-remove-index]').forEach((btn) => {
+        btn.addEventListener('click', () => removeFile(Number(btn.dataset.removeIndex)));
+      });
+    }
+
+    // Estado inicial
+    updateProgressBar(1);
+  })();
+</script>
+
+</body>
+</html>
