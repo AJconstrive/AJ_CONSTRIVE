@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contacto | AJ Constrive — Arquitectura, Ingeniería y Construcción</title>
+<meta name="description" content="Contáctanos para cotizar tu proyecto de arquitectura, ingeniería o construcción. Visitas técnicas, garantías, testimonios y equipo profesional de AJ Constrive." />
+
+<!-- Tailwind CSS (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          graphite: '#101820',
+          concrete: '#3C4552',
+          copper: '#B9743B',
+          forest: '#4A5D45',
+          bone: '#F7F5F2',
+          stone: '#D9D5CE',
+          ink: '#181818',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          sans: ['"General Sans"', 'Inter', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<!-- Google Fonts: Fraunces (títulos) + Inter (lectura) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- General Sans (Fontshare) -->
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" />
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+
+  .blueprint-grid {
+    background-image:
+      linear-gradient(rgba(247,245,242,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,245,242,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #B9743B;
+    outline-offset: 3px;
+  }
+
+  /* Acordeón FAQ: animación de altura vía grid-template-rows */
+  .accordion-panel-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-item[data-open="true"] .accordion-panel-wrap { grid-template-rows: 1fr; }
+  .accordion-panel-inner { overflow: hidden; }
+  .accordion-icon { transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1); }
+  .accordion-item[data-open="true"] .accordion-icon { transform: rotate(45deg); }
+  .accordion-item[data-open="true"] .accordion-trigger { color: #B9743B; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+
+<body class="bg-bone text-ink font-sans antialiased">
+
+<a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-copper focus:text-white focus:px-4 focus:py-2 focus:rounded">
+  Saltar al contenido principal
+</a>
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="fixed top-0 inset-x-0 z-50">
+  <nav class="bg-graphite/90 backdrop-blur-sm border-b border-white/10" aria-label="Navegación principal">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+
+      <a href="index.html" class="flex items-center gap-2 shrink-0" aria-label="AJ Constrive — Inicio">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 26L17 5L30 26" stroke="#B9743B" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M10 26L17 14L24 26" stroke="#F7F5F2" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>
+        <span class="font-display text-xl text-bone tracking-tight">AJ Constrive</span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-9 font-sans text-sm text-bone/85">
+        <li><a href="nosotros.html" class="hover:text-copper transition-colors duration-200">Nosotros</a></li>
+        <li><a href="servicios.html" class="hover:text-copper transition-colors duration-200">Servicios</a></li>
+        <li><a href="portafolio.html" class="hover:text-copper transition-colors duration-200">Portafolio</a></li>
+        <li><a href="proceso-tecnologia.html" class="hover:text-copper transition-colors duration-200">Nuestro Proceso</a></li>
+        <li><a href="sectores.html" class="hover:text-copper transition-colors duration-200">Sectores</a></li>
+        <li><a href="contacto.html" class="text-copper" aria-current="page">Contacto</a></li>
+      </ul>
+
+      <div class="flex items-center gap-4">
+        <a href="cotizaciones.html"
+           class="hidden sm:inline-flex items-center gap-2 bg-copper text-white text-sm font-medium px-5 py-2.5 rounded-md
+                  hover:bg-copper/90 hover:shadow-lg hover:shadow-copper/20 transition-all duration-200">
+          Solicita tu cotización
+        </a>
+
+        <button id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu"
+                class="lg:hidden text-bone p-2 -mr-2" aria-label="Abrir menú de navegación">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="hidden lg:hidden bg-graphite border-t border-white/10">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-bone/90 font-sans text-base">
+        <li><a href="nosotros.html" class="block py-1 hover:text-copper transition-colors">Nosotros</a></li>
+        <li><a href="servicios.html" class="block py-1 hover:text-copper transition-colors">Servicios</a></li>
+        <li><a href="portafolio.html" class="block py-1 hover:text-copper transition-colors">Portafolio</a></li>
+        <li><a href="proceso-tecnologia.html" class="block py-1 hover:text-copper transition-colors">Nuestro Proceso</a></li>
+        <li><a href="sectores.html" class="block py-1 hover:text-copper transition-colors">Sectores</a></li>
+        <li><a href="contacto.html" class="block py-1 text-copper">Contacto</a></li>
+        <li class="pt-2">
+          <a href="cotizaciones.html" class="inline-flex w-full justify-center bg-copper text-white text-sm font-medium px-5 py-3 rounded-md hover:bg-copper/90 transition-colors">
+            Solicita tu cotización
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main id="contenido">
+
+  <!-- ============ HERO ============ -->
+  <section class="relative h-[60vh] min-h-[420px] flex items-end overflow-hidden bg-graphite" aria-label="Contacto">
+    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop"
+         alt="Equipo de AJ Constrive coordinando un proyecto en obra"
+         class="absolute inset-0 w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/70 to-graphite/30"></div>
+    <div class="absolute inset-0 blueprint-grid opacity-40"></div>
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 pb-16 pt-32">
+      <nav aria-label="Ruta de navegación" class="mb-4">
+        <ol class="flex items-center gap-2 font-mono text-xs text-bone/60">
+          <li><a href="index.html" class="hover:text-copper transition-colors">Inicio</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="text-copper">Contacto</li>
+        </ol>
+      </nav>
+      <h1 class="font-display font-medium text-bone text-4xl sm:text-5xl lg:text-6xl leading-tight">
+        Hablemos de tu proyecto
+      </h1>
+      <p class="mt-4 text-bone/75 max-w-xl">
+        Escríbenos, agenda una visita técnica o pasa a conocer al equipo que va a acompañarte
+        de principio a fin.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIOS ============ -->
+  <section class="bg-bone" aria-labelledby="testimonios-heading">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+
+      <div class="max-w-2xl mb-14">
+        <p class="font-mono text-xs tracking-[0.25em] uppercase text-copper mb-4">Clientes AJ Constrive</p>
+        <h2 id="testimonios-heading" class="font-display font-medium text-3xl sm:text-4xl leading-tight text-graphite">
+          Obras entregadas, confianza construida
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-7">
+
+        <figure class="bg-white border border-stone rounded-lg p-7 flex flex-col">
+          <i data-lucide="quote" class="w-7 h-7 text-copper/50 mb-4"></i>
+          <blockquote class="text-concrete text-sm leading-relaxed flex-1">
+            El equipo cumplió cada fecha del cronograma y nos explicó cada avance de la obra
+            sin tecnicismos. La remodelación de la cocina quedó impecable.
+          </blockquote>
+          <figcaption class="mt-6 flex items-center gap-3 pt-5 border-t border-stone">
+            <img src="https://i.pravatar.cc/80?img=32" alt="" class="w-11 h-11 rounded-full object-cover" loading="lazy">
+            <div>
+              <p class="font-sans font-semibold text-sm text-graphite">Marcela Rojas</p>
+              <p class="text-xs text-concrete">Remodelación de cocina — Chapinero</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="bg-white border border-stone rounded-lg p-7 flex flex-col">
+          <i data-lucide="quote" class="w-7 h-7 text-copper/50 mb-4"></i>
+          <blockquote class="text-concrete text-sm leading-relaxed flex-1">
+            Contratamos la ampliación de la segunda planta y la garantía post-obra nos dio
+            mucha tranquilidad. Volveríamos a trabajar con ellos sin dudarlo.
+          </blockquote>
+          <figcaption class="mt-6 flex items-center gap-3 pt-5 border-t border-stone">
+            <img src="https://i.pravatar.cc/80?img=51" alt="" class="w-11 h-11 rounded-full object-cover" loading="lazy">
+            <div>
+              <p class="font-sans font-semibold text-sm text-graphite">Andrés Villamil</p>
+              <p class="text-xs text-concrete">Ampliación de vivienda — Suba</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="bg-white border border-stone rounded-lg p-7 flex flex-col">
+          <i data-lucide="quote" class="w-7 h-7 text-copper/50 mb-4"></i>
+          <blockquote class="text-concrete text-sm leading-relaxed flex-1">
+            La visita técnica inicial fue muy completa y el presupuesto se respetó de
+            principio a fin. El local comercial abrió justo en la fecha prometida.
+          </blockquote>
+          <figcaption class="mt-6 flex items-center gap-3 pt-5 border-t border-stone">
+            <img src="https://i.pravatar.cc/80?img=15" alt="" class="w-11 h-11 rounded-full object-cover" loading="lazy">
+            <div>
+              <p class="font-sans font-semibold text-sm text-graphite">Laura Peña</p>
+              <p class="text-xs text-concrete">Adecuación local comercial — Usaquén</p>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EQUIPO PROFESIONAL ============ -->
+  <section class="bg-graphite text-bone" aria-labelledby="equipo-heading">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+
+      <div class="max-w-2xl mb-14">
+        <p class="font-mono text-xs tracking-[0.25em] uppercase text-copper mb-4">Quiénes construyen contigo</p>
+        <h2 id="equipo-heading" class="font-display font-medium text-3xl sm:text-4xl leading-tight">
+          Equipo profesional
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="group bg-white/[0.04] border border-white/10 rounded-lg overflow-hidden">
+          <div class="aspect-[4/5] overflow-hidden">
+            <img src="https://i.pravatar.cc/400?img=12" alt="Retrato de Julián Herrera" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" loading="lazy">
+          </div>
+          <div class="p-5 border-t-2 border-copper">
+            <p class="font-sans font-semibold text-base">Julián Herrera</p>
+            <p class="text-xs text-copper font-medium mt-0.5">Director de Obra</p>
+            <p class="text-xs text-bone/60 mt-2">Ingeniería civil · 14 años en construcción residencial</p>
+          </div>
+        </div>
+
+        <div class="group bg-white/[0.04] border border-white/10 rounded-lg overflow-hidden">
+          <div class="aspect-[4/5] overflow-hidden">
+            <img src="https://i.pravatar.cc/400?img=47" alt="Retrato de Camila Ortiz" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" loading="lazy">
+          </div>
+          <div class="p-5 border-t-2 border-copper">
+            <p class="font-sans font-semibold text-base">Camila Ortiz</p>
+            <p class="text-xs text-copper font-medium mt-0.5">Arquitecta Líder</p>
+            <p class="text-xs text-bone/60 mt-2">Diseño arquitectónico · Remodelaciones integrales</p>
+          </div>
+        </div>
+
+        <div class="group bg-white/[0.04] border border-white/10 rounded-lg overflow-hidden">
+          <div class="aspect-[4/5] overflow-hidden">
+            <img src="https://i.pravatar.cc/400?img=68" alt="Retrato de Ricardo Bustos" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" loading="lazy">
+          </div>
+          <div class="p-5 border-t-2 border-copper">
+            <p class="font-sans font-semibold text-base">Ricardo Bustos</p>
+            <p class="text-xs text-copper font-medium mt-0.5">Jefe de Cuadrilla</p>
+            <p class="text-xs text-bone/60 mt-2">Obra civil y acabados · Control de calidad en sitio</p>
+          </div>
+        </div>
+
+        <div class="group bg-white/[0.04] border border-white/10 rounded-lg overflow-hidden">
+          <div class="aspect-[4/5] overflow-hidden">
+            <img src="https://i.pravatar.cc/400?img=45" alt="Retrato de Natalia Gómez" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" loading="lazy">
+          </div>
+          <div class="p-5 border-t-2 border-copper">
+            <p class="font-sans font-semibold text-base">Natalia Gómez</p>
+            <p class="text-xs text-copper font-medium mt-0.5">Coordinadora de Clientes</p>
+            <p class="text-xs text-bone/60 mt-2">Seguimiento de proyectos · Presupuestos y garantías</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREGUNTAS FRECUENTES (ACORDEÓN) ============ -->
+  <section id="faq" class="bg-bone" aria-labelledby="faq-heading">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+      <div class="grid lg:grid-cols-[1fr_1.4fr] gap-14">
+
+        <div>
+          <p class="font-mono text-xs tracking-[0.25em] uppercase text-copper mb-4">Antes de empezar</p>
+          <h2 id="faq-heading" class="font-display font-medium text-3xl sm:text-4xl leading-tight text-graphite">
+            Preguntas frecuentes
+          </h2>
+          <p class="mt-5 text-concrete text-sm leading-relaxed max-w-sm">
+            Resolvemos las dudas más comunes sobre visitas técnicas, tiempos de entrega,
+            garantías y formas de pago. Si no encuentras tu respuesta, escríbenos directamente.
+          </p>
+          <a href="#contacto-form" class="mt-6 inline-flex items-center gap-2 text-copper text-sm font-medium hover:text-[#a3652f] transition-colors">
+            Escribir al equipo
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <div class="divide-y divide-stone border-t border-b border-stone" id="accordion">
+
+          <div class="accordion-item" data-open="false">
+            <h3>
+              <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 py-5 text-left font-sans font-semibold text-graphite text-base" aria-expanded="false" aria-controls="panel-1" id="trigger-1">
+                ¿Cómo se agenda una visita técnica?
+                <span class="accordion-icon shrink-0 text-copper text-2xl leading-none">+</span>
+              </button>
+            </h3>
+            <div class="accordion-panel-wrap">
+              <div class="accordion-panel-inner">
+                <div id="panel-1" role="region" aria-labelledby="trigger-1" class="pb-5 pr-8 text-sm text-concrete leading-relaxed">
+                  Escríbenos por WhatsApp o completa el formulario de esta página con la dirección
+                  y el tipo de proyecto. Coordinamos una visita sin costo en un plazo de 24 a 48
+                  horas hábiles para levantar medidas y entender el alcance de la obra.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-open="false">
+            <h3>
+              <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 py-5 text-left font-sans font-semibold text-graphite text-base" aria-expanded="false" aria-controls="panel-2" id="trigger-2">
+                ¿Cuáles son los tiempos de entrega?
+                <span class="accordion-icon shrink-0 text-copper text-2xl leading-none">+</span>
+              </button>
+            </h3>
+            <div class="accordion-panel-wrap">
+              <div class="accordion-panel-inner">
+                <div id="panel-2" role="region" aria-labelledby="trigger-2" class="pb-5 pr-8 text-sm text-concrete leading-relaxed">
+                  Depende del alcance: una remodelación de baño o cocina suele tomar entre 2 y 4
+                  semanas, mientras que ampliaciones u obra nueva pueden extenderse de 2 a 6
+                  meses. En la cotización te entregamos un cronograma detallado por etapas.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-open="false">
+            <h3>
+              <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 py-5 text-left font-sans font-semibold text-graphite text-base" aria-expanded="false" aria-controls="panel-3" id="trigger-3">
+                ¿Qué garantías ofrecen sobre la obra?
+                <span class="accordion-icon shrink-0 text-copper text-2xl leading-none">+</span>
+              </button>
+            </h3>
+            <div class="accordion-panel-wrap">
+              <div class="accordion-panel-inner">
+                <div id="panel-3" role="region" aria-labelledby="trigger-3" class="pb-5 pr-8 text-sm text-concrete leading-relaxed">
+                  Toda obra entregada cuenta con garantía escrita de 12 meses sobre mano de obra
+                  y acabados, y respetamos las garantías de fábrica de los materiales instalados.
+                  Cualquier ajuste post-entrega se atiende sin costo adicional.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-open="false">
+            <h3>
+              <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 py-5 text-left font-sans font-semibold text-graphite text-base" aria-expanded="false" aria-controls="panel-4" id="trigger-4">
+                ¿Qué formas de pago manejan?
+                <span class="accordion-icon shrink-0 text-copper text-2xl leading-none">+</span>
+              </button>
+            </h3>
+            <div class="accordion-panel-wrap">
+              <div class="accordion-panel-inner">
+                <div id="panel-4" role="region" aria-labelledby="trigger-4" class="pb-5 pr-8 text-sm text-concrete leading-relaxed">
+                  Trabajamos con pagos por avance de obra: un anticipo inicial y desembolsos
+                  parciales asociados a hitos definidos en el cronograma. Aceptamos transferencia
+                  bancaria y, para proyectos grandes, evaluamos planes de pago a medida.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" data-open="false">
+            <h3>
+              <button type="button" class="accordion-trigger w-full flex items-center justify-between gap-4 py-5 text-left font-sans font-semibold text-graphite text-base" aria-expanded="false" aria-controls="panel-5" id="trigger-5">
+                ¿En qué zonas prestan el servicio?
+                <span class="accordion-icon shrink-0 text-copper text-2xl leading-none">+</span>
+              </button>
+            </h3>
+            <div class="accordion-panel-wrap">
+              <div class="accordion-panel-inner">
+                <div id="panel-5" role="region" aria-labelledby="trigger-5" class="pb-5 pr-8 text-sm text-concrete leading-relaxed">
+                  Atendemos Bogotá y municipios cercanos de la sabana. Para proyectos fuera de
+                  esta zona, contáctanos y evaluamos la cobertura según la magnitud de la obra.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO PRINCIPAL ============ -->
+  <section class="bg-graphite text-bone" aria-labelledby="contacto-heading">
+    <div class="relative">
+      <div class="absolute inset-0 blueprint-grid opacity-30" aria-hidden="true"></div>
+      <div class="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+
+        <div class="max-w-2xl mb-14">
+          <p class="font-mono text-xs tracking-[0.25em] uppercase text-copper mb-4">Ficha de contacto</p>
+          <h2 id="contacto-heading" class="font-display font-medium text-3xl sm:text-4xl leading-tight">
+            Cuéntanos tu proyecto
+          </h2>
+          <p class="mt-4 text-bone/70 text-sm sm:text-base">
+            Completa el formulario o escríbenos directamente. Respondemos cotizaciones en menos
+            de 24 horas hábiles.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-10">
+
+          <!-- Columna 1: Formulario + datos de contacto -->
+          <div class="space-y-10">
+
+            <form id="contacto-form" class="bg-white/[0.04] border border-white/10 rounded-lg p-7 space-y-5">
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="nombre" class="block text-sm font-medium text-bone mb-1.5">Nombre completo</label>
+                  <input type="text" id="nombre" name="nombre" required autocomplete="name"
+                    class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-bone placeholder:text-bone/35 outline-none focus:border-copper transition-colors"
+                    placeholder="Tu nombre">
+                </div>
+                <div>
+                  <label for="telefono" class="block text-sm font-medium text-bone mb-1.5">Teléfono</label>
+                  <input type="tel" id="telefono" name="telefono" required autocomplete="tel"
+                    class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-bone placeholder:text-bone/35 outline-none focus:border-copper transition-colors"
+                    placeholder="+57 300 000 0000">
+                </div>
+              </div>
+
+              <div>
+                <label for="correo" class="block text-sm font-medium text-bone mb-1.5">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" required autocomplete="email"
+                  class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-bone placeholder:text-bone/35 outline-none focus:border-copper transition-colors"
+                  placeholder="tucorreo@ejemplo.com">
+              </div>
+
+              <div>
+                <label for="servicio" class="block text-sm font-medium text-bone mb-1.5">Tipo de proyecto</label>
+                <select id="servicio" name="servicio"
+                  class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-bone outline-none focus:border-copper transition-colors">
+                  <option class="bg-graphite">Remodelación residencial</option>
+                  <option class="bg-graphite">Diseño arquitectónico</option>
+                  <option class="bg-graphite">Ingeniería</option>
+                  <option class="bg-graphite">Construcción / obra nueva</option>
+                  <option class="bg-graphite">Carpintería y mobiliario</option>
+                  <option class="bg-graphite">Otro</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="mensaje" class="block text-sm font-medium text-bone mb-1.5">Cuéntanos sobre tu proyecto</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required
+                  class="w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-bone placeholder:text-bone/35 outline-none focus:border-copper transition-colors resize-none"
+                  placeholder="Dirección, metros aproximados, alcance de la obra..."></textarea>
+              </div>
+
+              <button type="submit"
+                class="w-full inline-flex items-center justify-center gap-2 bg-copper text-white font-medium py-3.5 rounded-md
+                       hover:bg-[#a3652f] hover:shadow-lg hover:shadow-copper/20 transition-all duration-200">
+                Enviar solicitud
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+              <p id="form-status" class="text-xs text-bone/60 hidden" role="status"></p>
+            </form>
+
+            <!-- Datos directos -->
+            <div class="grid sm:grid-cols-2 gap-5">
+              <a href="https://wa.me/573000000000?text=Hola%20AJ%20Constrive%2C%20quiero%20cotizar%20un%20proyecto"
+                target="_blank" rel="noopener noreferrer"
+                class="flex items-center gap-3 bg-white/[0.04] border border-white/10 hover:border-copper rounded-lg p-5 transition-colors">
+                <i data-lucide="message-circle" class="w-6 h-6 text-copper shrink-0"></i>
+                <div>
+                  <p class="font-sans font-semibold text-sm text-bone">WhatsApp</p>
+                  <p class="text-xs text-bone/60">+57 300 000 0000</p>
+                </div>
+              </a>
+
+              <a href="mailto:contacto@ajconstrive.com"
+                class="flex items-center gap-3 bg-white/[0.04] border border-white/10 hover:border-copper rounded-lg p-5 transition-colors">
+                <i data-lucide="mail" class="w-6 h-6 text-copper shrink-0"></i>
+                <div>
+                  <p class="font-sans font-semibold text-sm text-bone">Correo</p>
+                  <p class="text-xs text-bone/60">contacto@ajconstrive.com</p>
+                </div>
+              </a>
+
+              <div class="flex items-center gap-3 bg-white/[0.04] border border-white/10 rounded-lg p-5">
+                <i data-lucide="phone" class="w-6 h-6 text-copper shrink-0"></i>
+                <div>
+                  <p class="font-sans font-semibold text-sm text-bone">Teléfono</p>
+                  <p class="text-xs text-bone/60">+57 (601) 000 0000</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 bg-white/[0.04] border border-white/10 rounded-lg p-5">
+                <i data-lucide="clock" class="w-6 h-6 text-copper shrink-0"></i>
+                <div>
+                  <p class="font-sans font-semibold text-sm text-bone">Horario</p>
+                  <p class="text-xs text-bone/60">Lun–Vie: 7 a.m.–5 p.m.<br>Sáb: 8 a.m.–12 p.m.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Redes sociales -->
+            <div class="flex items-center gap-4 pt-1">
+              <span class="text-xs font-sans font-semibold uppercase tracking-wide text-bone/60">Síguenos</span>
+              <a href="#" aria-label="Instagram de AJ Constrive" class="w-9 h-9 grid place-items-center border border-white/15 rounded-md hover:border-copper hover:text-copper transition-colors">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+              </a>
+              <a href="#" aria-label="Facebook de AJ Constrive" class="w-9 h-9 grid place-items-center border border-white/15 rounded-md hover:border-copper hover:text-copper transition-colors">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="#" aria-label="LinkedIn de AJ Constrive" class="w-9 h-9 grid place-items-center border border-white/15 rounded-md hover:border-copper hover:text-copper transition-colors">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Columna 2: Mapa -->
+          <div class="lg:sticky lg:top-28 h-fit">
+            <div class="relative border border-white/10 rounded-lg overflow-hidden bg-white/[0.04] aspect-[4/5] lg:aspect-auto lg:h-full min-h-[420px]">
+              <iframe
+                title="Ubicación de AJ Constrive en el mapa"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31812.827!2d-74.0721!3d4.7110!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNDInMzkuNiJOIDc0wrA0MyczLjYiVw!5e0!3m2!1ses!2sco!4v0000000000"
+                class="absolute inset-0 w-full h-full grayscale-[35%] contrast-125"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <p class="mt-4 text-xs text-bone/50 font-mono">
+              Cra. 00 # 00-00, Bogotá D.C., Colombia — Visitas previa cita.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink text-bone/70">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-14">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+      <div>
+        <span class="font-display text-xl text-bone">AJ Constrive</span>
+        <p class="mt-3 text-sm leading-relaxed max-w-xs">
+          Arquitectura, ingeniería, remodelación, carpintería y construcción integral en un solo equipo.
+        </p>
+      </div>
+
+      <nav aria-label="Enlaces de la empresa">
+        <h4 class="font-sans font-semibold text-bone text-sm uppercase tracking-wide mb-4">Empresa</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="nosotros.html" class="hover:text-copper transition-colors">Nosotros</a></li>
+          <li><a href="portafolio.html" class="hover:text-copper transition-colors">Portafolio</a></li>
+          <li><a href="proceso-tecnologia.html" class="hover:text-copper transition-colors">Nuestro Proceso</a></li>
+          <li><a href="blog.html" class="hover:text-copper transition-colors">Blog</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Enlaces de servicios">
+        <h4 class="font-sans font-semibold text-bone text-sm uppercase tracking-wide mb-4">Servicios</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="servicios-remodelaciones.html" class="hover:text-copper transition-colors">Remodelaciones</a></li>
+          <li><a href="servicios-diseno-arquitectonico.html" class="hover:text-copper transition-colors">Diseño arquitectónico</a></li>
+          <li><a href="servicios-ingenieria.html" class="hover:text-copper transition-colors">Ingeniería</a></li>
+          <li><a href="servicios-carpinteria.html" class="hover:text-copper transition-colors">Carpintería</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <h4 class="font-sans font-semibold text-bone text-sm uppercase tracking-wide mb-4">Contacto</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="contacto.html" class="hover:text-copper transition-colors">Escríbenos</a></li>
+          <li><a href="cotizaciones.html" class="hover:text-copper transition-colors">Solicita cotización</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-bone/50">
+      <p>&copy; <span id="year"></span> AJ Constrive. Todos los derechos reservados.</p>
+      <p>Arquitectura · Ingeniería · Construcción</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('hidden') === false;
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.innerHTML = isOpen
+      ? '<i data-lucide="x" class="w-6 h-6"></i>'
+      : '<i data-lucide="menu" class="w-6 h-6"></i>';
+    lucide.createIcons();
+  });
+
+  // Acordeón de preguntas frecuentes (exclusivo: solo uno abierto a la vez)
+  const accordionItems = document.querySelectorAll('.accordion-item');
+  accordionItems.forEach((item) => {
+    const trigger = item.querySelector('.accordion-trigger');
+    trigger.addEventListener('click', () => {
+      const isOpen = item.getAttribute('data-open') === 'true';
+      accordionItems.forEach((other) => {
+        if (other !== item) {
+          other.setAttribute('data-open', 'false');
+          other.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        }
+      });
+      item.setAttribute('data-open', String(!isOpen));
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  // Formulario de contacto: feedback simple sin backend
+  const form = document.getElementById('contacto-form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    status.textContent = '¡Gracias! Recibimos tu solicitud y te contactaremos muy pronto.';
+    status.classList.remove('hidden');
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
